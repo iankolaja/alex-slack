@@ -11,7 +11,7 @@ const web = new WebClient(token);
 const rtm = new RTMClient(token);
 
 rtm.on('message', (event) => {
-  var channel, user, text;
+  var channel, user, text, slack_message;
   channel = event.channel;
   user = event.user;
   text = event.text;
@@ -26,9 +26,17 @@ rtm.on('message', (event) => {
   for (var i = 0; i < a_messages.length; i++) {
   response += Alex(text).messages[i].reason + '\n';
 }}
-  web.chat.postEphemeral(token,[],channel,response,user);
-  console.log("@alexbot responded with \"" + response + "\"");
-	
+  if (response.length) {
+  slack_message = {
+	  "token": token,
+	  "attachment": [],
+	  "channel": channel,
+	  "response": response,
+	  "user": user
+  }  
+    web.chat.postEphemeral(slack_message);
+    console.log("@alexbot responded with \"" + response + "\"");
+  }	
 });
 
 (async () => {
