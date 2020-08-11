@@ -20,7 +20,7 @@ rtm.on('message', (event) => {
 
   if(a_messages.length) {
     if (!channel.is_im) {
-	response += "You said: \"" + text + '\n';
+	response += "You said: \"" + text + '\"\n';
     }
 
   for (var i = 0; i < a_messages.length; i++) {
