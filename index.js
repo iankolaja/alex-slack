@@ -31,8 +31,10 @@ rtm.on('message', (event) => {
 	  "token": token,
 	  "attachment": [],
 	  "channel": channel,
-	  "response": response,
-	  "user": user
+	  "text": response,
+	  "user": user,
+	  "as_user": false,
+	  "username": "alexbot"
   }  
     web.chat.postEphemeral(slack_message);
     console.log("@alexbot responded with \"" + response + "\"");
