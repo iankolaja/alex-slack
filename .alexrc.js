@@ -1,0 +1,10 @@
+exports.allow = [
+    "her-him",
+    "he-she",
+    "herself-himself",
+    "boy-girl",
+    "gals-men",
+    "gal-guy",
+    "aunt-uncle",
+    "dad-mom"
+];
