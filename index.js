@@ -1,6 +1,7 @@
 const { WebClient } = require('@slack/web-api');
 const { RTMClient } = require('@slack/rtm-api');
 Alex = require('alex');
+var http = require('http');
  
 // Read a token from the environment variables
 const token = process.env.ALEX_TOKEN;
