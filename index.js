@@ -26,7 +26,7 @@ rtm.on('message', (event) => {
   for (var i = 0; i < a_messages.length; i++) {
   response += Alex(text).messages[i].reason + '\n';
 }}
-  web.chat.postEphemeral(token: token,attachment: [],channel: channel, text: response,user: user);
+  web.chat.postEphemeral(token,[],channel,response,user);
   console.log("@alexbot responded with \"" + response + "\"");
 	
 });
