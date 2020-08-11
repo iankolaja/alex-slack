@@ -11,6 +11,6 @@
   "license": "MIT",
   "dependencies": {
     "alex": "^1.1.0",
-    "slack-client": "^1.4.1"
+    "@slack/web-api": "^5.11.0"
   }
 }
