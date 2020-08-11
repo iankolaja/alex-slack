@@ -11,25 +11,26 @@ const token = process.env.ALEX_TOKEN;
 const web = new WebClient(token);
 const rtm = new RTMClient(token);
 
-var alex_config = [{
-  "allow": ["her-him",
-    "he-she",
-    "herself-himself",
-    "boy-girl",
-    "gals-men",
-    "gal-guy",
-    "aunt-uncle",
-    "dad-mom"]
-}]
-
-
 rtm.on('message', (event) => {
-  var channel, user, text, slack_message;
+  var channel, user, text, slack_message,alex_input;
   channel = event.channel;
   user = event.user;
   text = event.text;
   var response = "";
-  var a_messages = Alex(text,alex_config).messages;
+
+  alex_input = {"value":text, 
+		"config":{
+  		  "allow": ["her-him",
+			    "he-she",
+			    "herself-himself",
+			    "boy-girl",
+			    "gals-men",
+			    "gal-guy",
+			    "aunt-uncle",
+			    "dad-mom"]
+}}
+	
+  var a_messages = Alex(alex_input).messages;
 
   if(a_messages.length) {
     if (!channel.is_im) {
@@ -38,7 +39,7 @@ rtm.on('message', (event) => {
     }
 
   for (var i = 0; i < a_messages.length; i++) {
-  response += Alex(text,alex_config).messages[i].reason + '\n';
+  response += Alex(alex_input).messages[i].reason + '\n';
 }}
   if (response.length) {
   slack_message = {
