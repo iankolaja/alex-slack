@@ -26,7 +26,7 @@ rtm.on('message', (event) => {
   for (var i = 0; i < a_messages.length; i++) {
   response += Alex(text).messages[i].reason + '\n';
 }}
-  chat.postEphemeral(token,[],channel,response,user);
+  web.chat.postEphemeral(token,[],channel,response,user);
   return console.log("@" + slack.self.name + " responded with \"" + response + "\"");
 	
 });
