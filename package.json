@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "alex": "^1.1.0",
-    "@slack/web-api": "^5.11.0"
+    "@slack/web-api": "^5.11.0",
+    "@slack/rtm-api": "^5.0.5"
   }
 }
