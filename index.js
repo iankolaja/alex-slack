@@ -63,12 +63,22 @@ slack.on('message', function(message) {
     var a_messages = Alex(text).messages;
 
     if(a_messages.length) {
+	  if (!channel.is_im) {
+	  	response += "You said: \"" + text + "\" in " + channelName + '\n';
+	  }
+	  
       for (var i = 0; i < a_messages.length; i++) {
         response += Alex(text).messages[i].reason + '\n';
       };
 
-      // channel.send(response);
-      slack.chatFacet.postEphemeral(token,channel.ID,[],response,userName)
+	  if (channel.is_im) {
+		channel.send(response);
+	  } else {
+	  	slack.openDM(message.user, function(data){
+	  	  dm = slack.getChannelGroupOrDMByID(data.channel.id);
+		  dm.send(response);
+	  	});
+	  }
       return console.log("@" + slack.self.name + " responded with \"" + response + "\"");
     }
   } else {
