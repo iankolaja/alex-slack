@@ -6,21 +6,8 @@ var bot_name = "alexbot";
  
 // Read a token from the environment variables
 const token = process.env.ALEX_TOKEN;
- 
-// Initialize
-const web = new WebClient(token);
-const rtm = new RTMClient(token);
 
-rtm.on('message', (event) => {
-  var channel, user, text, slack_message,alex_input;
-  channel = event.channel;
-  user = event.user;
-  text = event.text;
-  var response = "";
-
-  alex_input = {"value":text, 
-		"config":{
-  		  "allow": ["her-him",
+var alex_config = {"allow": ["her-him",
 			    "he-she",
 			    "herself-himself",
 			    "boy-girl",
@@ -28,9 +15,22 @@ rtm.on('message', (event) => {
 			    "gal-guy",
 			    "aunt-uncle",
 			    "dad-mom"]
-}}
+}
+
+// Initialize
+const web = new WebClient(token);
+const rtm = new RTMClient(token);
+
+rtm.on('message', (event) => {
+  var channel, user, text, slack_message;
+  channel = event.channel;
+  user = event.user;
+  text = event.text;
+  var response = "";
+
+
 	
-  var a_messages = Alex(alex_input).messages;
+  var a_messages = Alex(text,config:alex_config).messages;
 
   if(a_messages.length) {
     if (!channel.is_im) {
@@ -39,7 +39,7 @@ rtm.on('message', (event) => {
     }
 
   for (var i = 0; i < a_messages.length; i++) {
-  response += Alex(alex_input).messages[i].reason + '\n';
+  response += Alex(text,config:alex_config).messages[i].reason + '\n';
 }}
   if (response.length) {
   slack_message = {
