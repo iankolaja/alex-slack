@@ -11,7 +11,7 @@ const token = process.env.ALEX_TOKEN;
 const web = new WebClient(token);
 const rtm = new RTMClient(token);
 
-var alex_config = {
+var alex_config = [{
   "allow": ["her-him",
     "he-she",
     "herself-himself",
@@ -20,7 +20,7 @@ var alex_config = {
     "gal-guy",
     "aunt-uncle",
     "dad-mom"]
-}
+}]
 
 
 rtm.on('message', (event) => {
@@ -33,7 +33,7 @@ rtm.on('message', (event) => {
 
   if(a_messages.length) {
     if (!channel.is_im) {
-	console.log("User " + user + "said " + text);
+	console.log("User " + user + " said: " + text);
 	response += "You said: \"" + text + '\"\n';
     }
 
