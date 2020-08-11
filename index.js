@@ -68,7 +68,7 @@ slack.on('message', function(message) {
       };
 
       // channel.send(response);
-      Slack.chat.postEphemeral(token,channel.ID,[{"pretext": "pre-hello", "text": "text-world"}],response,userName)
+      slack.chatFacet.postEphemeral(token,channel.ID,[],response,userName)
       return console.log("@" + slack.self.name + " responded with \"" + response + "\"");
     }
   } else {
