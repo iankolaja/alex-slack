@@ -30,7 +30,7 @@ rtm.on('message', (event) => {
 
 
 	
-  var a_messages = Alex({value:text,config:alex_config}).messages;
+  var a_messages = Alex(text).messages;
 
   if(a_messages.length) {
     if (!channel.is_im) {
@@ -39,7 +39,7 @@ rtm.on('message', (event) => {
     }
 
   for (var i = 0; i < a_messages.length; i++) {
-  response += Alex({value:text,config:alex_config}).messages[i].reason + '\n';
+  response += Alex(text).messages[i].reason + '\n';
 }}
   if (response.length) {
   slack_message = {
