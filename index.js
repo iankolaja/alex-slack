@@ -2,6 +2,7 @@ const { WebClient } = require('@slack/web-api');
 const { RTMClient } = require('@slack/rtm-api');
 Alex = require('alex');
 var http = require('http');
+var bot_name = "alexbot"
  
 // Read a token from the environment variables
 const token = process.env.ALEX_TOKEN;
@@ -16,15 +17,16 @@ rtm.on('message', (event) => {
   user = event.user;
   text = event.text;
   var response = "";
-  var a_messages = Alex(text).messages;
+  var a_messages = Alex(text,".alexrc.js").messages;
 
   if(a_messages.length) {
     if (!channel.is_im) {
+	console.log("User " + user + "said " + text);
 	response += "You said: \"" + text + '\"\n';
     }
 
   for (var i = 0; i < a_messages.length; i++) {
-  response += Alex(text).messages[i].reason + '\n';
+  response += Alex(text,".alexrc.js").messages[i].reason + '\n';
 }}
   if (response.length) {
   slack_message = {
@@ -34,15 +36,16 @@ rtm.on('message', (event) => {
 	  "text": response,
 	  "user": user,
 	  "as_user": false,
-	  "username": "alexbot"
+	  "username": bot_name
   }  
     web.chat.postEphemeral(slack_message);
-    console.log("@alexbot responded with \"" + response + "\"");
+    console.log("@"+bot_name+" responded with \"" + response + "\"");
   }	
 });
 
 (async () => {
   // Connect to Slack
+  console.log("@"+bot_name+" connected to Slack!");
   const { self, team } = await rtm.start();
 })();
 
